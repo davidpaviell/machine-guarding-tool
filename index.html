@@ -3,68 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NZ Machine Guarding Standards</title>
+<title>Machine Guarding Standards — WorkSafe NZ</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ── WorkSafe NZ brand tokens ──────────────────────────────────────
+     Navy:   #1B2A3B   (header, footer, strong text)
+     Yellow: #F5C800   (primary accent, CTA, highlights)
+     Dark yellow: #D4AC00 (hover/border on yellow)
+     White:  #FFFFFF
+     Light bg: #F4F4F1 (body/page bg — off-white)
+     Mid grey: #E8E8E2 (card borders, dividers)
+     Text grey: #595950 (secondary text)
+     Red (danger): #C0392B
+     Amber (warn): #D4690A
+     Green (safe): #2E7D32
+  ─────────────────────────────────────────────────────────────────── */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     font-size: 14px;
-    background: #f5f5f0;
-    color: #2c2c2a;
+    background: #F4F4F1;
+    color: #1B2A3B;
     min-height: 100vh;
   }
 
-  .app-wrap {
-    max-width: 860px;
+  /* Header */
+  .ws-header {
+    background: #1B2A3B;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 56px;
+    border-bottom: 4px solid #F5C800;
+  }
+
+  .ws-logo-wrap {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .ws-logo-wrap img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  /* Fallback shown only if image fails to load */
+  .ws-logo-fallback {
+    display: none;
+    width: 36px;
+    height: 36px;
+    background: #F5C800;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ws-logo-fallback svg { width: 22px; height: 22px; }
+
+  .ws-header-text { display: flex; flex-direction: column; }
+  .ws-header-name { font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.01em; line-height: 1.2; }
+  .ws-header-tagline { font-size: 11px; color: #A8B8C8; letter-spacing: 0.02em; }
+
+  .ws-header-badge {
+    margin-left: auto;
+    background: #F5C800;
+    color: #1B2A3B;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Page wrap */
+  .page-wrap {
+    max-width: 880px;
     margin: 0 auto;
-    padding: 20px 16px 32px;
+    padding: 24px 16px 40px;
   }
 
-  .app-title {
+  /* Hero band */
+  .hero-band {
+    background: #1B2A3B;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    border-left: 6px solid #F5C800;
+  }
+
+  .hero-title {
     font-size: 20px;
-    font-weight: 600;
-    color: #1a1a18;
-    margin-bottom: 4px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 5px;
   }
 
-  .app-sub {
+  .hero-sub {
     font-size: 13px;
-    color: #73726c;
-    margin-bottom: 18px;
+    color: #A8B8C8;
     line-height: 1.5;
   }
 
-  /* Tabs */
+  .hero-sub strong { color: #F5C800; font-weight: 600; }
+
+  /* Tab bar */
   .tab-bar {
     display: flex;
-    gap: 6px;
-    margin-bottom: 18px;
+    gap: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1B2A3B;
     flex-wrap: wrap;
   }
 
   .tab {
-    padding: 7px 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 10px 18px;
+    border: none;
+    border-bottom: none;
     font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-    background: #fff;
-    color: #555;
+    background: #E8E8E2;
+    color: #595950;
     transition: all .15s;
     font-family: inherit;
-    font-weight: 400;
+    letter-spacing: 0.01em;
+    border-radius: 6px 6px 0 0;
+    margin-right: 3px;
+    margin-bottom: -2px;
+    border: 1px solid #ccc;
+    border-bottom: none;
   }
 
   .tab.active {
-    background: #e8f0fb;
-    color: #1a5cb8;
-    border-color: #a8c0ec;
-    font-weight: 600;
+    background: #1B2A3B;
+    color: #F5C800;
+    border-color: #1B2A3B;
   }
 
   .tab:hover:not(.active) {
-    background: #f0efe8;
+    background: #d0d0c8;
+    color: #1B2A3B;
   }
 
   /* Panels */
@@ -72,176 +157,199 @@
   .panel.active { display: block; }
 
   .section-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a1a18;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1B2A3B;
     margin-bottom: 4px;
   }
 
   .section-sub {
     font-size: 13px;
-    color: #73726c;
+    color: #595950;
     margin-bottom: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   /* Cards */
   .card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 16px 18px;
+    background: #FFFFFF;
+    border: 1px solid #E8E8E2;
+    border-radius: 6px;
+    padding: 18px 20px;
     margin-bottom: 14px;
+    border-top: 3px solid #1B2A3B;
   }
+
+  .card.accent-yellow { border-top-color: #F5C800; }
+  .card.accent-green  { border-top-color: #2E7D32; }
+  .card.accent-red    { border-top-color: #C0392B; }
 
   .card-title {
     font-size: 13px;
-    font-weight: 600;
-    color: #1a1a18;
-    margin-bottom: 10px;
+    font-weight: 700;
+    color: #1B2A3B;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   /* Form rows */
   .field-row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 14px;
     flex-wrap: wrap;
   }
 
   .field-label {
     font-size: 13px;
-    color: #555;
-    min-width: 160px;
+    color: #595950;
+    font-weight: 500;
+    min-width: 170px;
   }
 
   .field-val {
-    font-size: 13px;
-    font-weight: 600;
-    min-width: 60px;
-    color: #1a1a18;
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 64px;
+    color: #1B2A3B;
+    background: #F4F4F1;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #E8E8E2;
+    text-align: center;
   }
 
+  /* Range slider — WorkSafe yellow thumb */
   input[type=range] {
     -webkit-appearance: none;
     appearance: none;
-    width: 100%;
-    max-width: 260px;
-    height: 4px;
-    background: #d3d1c7;
-    border-radius: 2px;
+    flex: 1;
+    max-width: 280px;
+    height: 5px;
+    background: #D0D0C8;
+    border-radius: 3px;
     outline: none;
     cursor: pointer;
   }
 
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #1a5cb8;
+    background: #F5C800;
     cursor: pointer;
-    border: 2px solid #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    border: 3px solid #1B2A3B;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   }
 
   input[type=range]::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #1a5cb8;
+    background: #F5C800;
     cursor: pointer;
-    border: 2px solid #fff;
+    border: 3px solid #1B2A3B;
   }
 
   /* Result boxes */
   .result-box {
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-top: 4px;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-top: 6px;
   }
 
-  .result-box.success { background: #eaf3de; border: 1px solid #a4c96a; }
-  .result-box.warn    { background: #faeeda; border: 1px solid #e6b060; }
-  .result-box.danger  { background: #fcebeb; border: 1px solid #e8a0a0; }
+  .result-box.success { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+  .result-box.warn    { background: #FFF3E0; border-left: 5px solid #D4690A; }
+  .result-box.danger  { background: #FFEBEE; border-left: 5px solid #C0392B; }
 
   .result-label {
     font-size: 11px;
-    color: #777;
-    margin-bottom: 3px;
+    color: #595950;
+    font-weight: 700;
+    margin-bottom: 4px;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
   }
 
   .result-num {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
+    line-height: 1.1;
   }
 
-  .result-num.success { color: #3b6d11; }
-  .result-num.warn    { color: #854f0b; }
-  .result-num.danger  { color: #a32d2d; }
+  .result-num.success { color: #2E7D32; }
+  .result-num.warn    { color: #D4690A; }
+  .result-num.danger  { color: #C0392B; }
 
   .result-detail {
     font-size: 12px;
-    line-height: 1.5;
-    color: #555;
+    line-height: 1.6;
+    color: #595950;
   }
 
-  /* Metric cards */
+  /* Metric grid */
   .metric-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 10px;
     margin-bottom: 14px;
   }
 
   .metric-card {
-    background: #f5f5f0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background: #F4F4F1;
+    border: 1px solid #E8E8E2;
+    border-radius: 6px;
     padding: 12px 10px;
     text-align: center;
+    border-top: 3px solid #1B2A3B;
   }
 
   .metric-val {
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 700;
-    color: #1a1a18;
+    color: #1B2A3B;
   }
 
-  .metric-val.blue   { color: #185fa5; }
-  .metric-val.green  { color: #3b6d11; }
-  .metric-val.amber  { color: #854f0b; }
-  .metric-val.red    { color: #a32d2d; }
+  .metric-val.yellow { color: #1B2A3B; background: #F5C800; display: inline-block; padding: 2px 8px; border-radius: 3px; }
+  .metric-val.green  { color: #2E7D32; }
+  .metric-val.amber  { color: #D4690A; }
+  .metric-val.red    { color: #C0392B; }
 
   .metric-label {
     font-size: 11px;
-    color: #73726c;
-    margin-top: 3px;
-    line-height: 1.3;
+    color: #595950;
+    margin-top: 4px;
+    line-height: 1.4;
   }
 
   /* Shape buttons */
+  .shape-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+
   .shape-btn {
-    padding: 7px 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 8px 16px;
+    border: 2px solid #1B2A3B;
+    border-radius: 4px;
     font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
-    background: #fff;
-    color: #555;
+    background: #FFFFFF;
+    color: #1B2A3B;
     transition: all .15s;
     font-family: inherit;
+    letter-spacing: 0.01em;
   }
 
   .shape-btn.active {
-    background: #e8f0fb;
-    color: #1a5cb8;
-    border-color: #a8c0ec;
-    font-weight: 600;
+    background: #1B2A3B;
+    color: #F5C800;
+  }
+
+  .shape-btn:hover:not(.active) {
+    background: #F4F4F1;
   }
 
   /* Tables */
@@ -251,41 +359,33 @@
     font-size: 13px;
   }
 
+  .rules-table thead tr {
+    background: #1B2A3B;
+  }
+
   .rules-table th {
     text-align: left;
-    padding: 8px 12px;
-    color: #73726c;
-    font-weight: 600;
-    border-bottom: 1px solid #ddd;
-    background: #fafaf7;
+    padding: 9px 12px;
+    color: #F5C800;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .rules-table td {
-    padding: 8px 12px;
-    border-bottom: 1px solid #eee;
-    color: #2c2c2a;
+    padding: 9px 12px;
+    border-bottom: 1px solid #E8E8E2;
+    color: #1B2A3B;
     vertical-align: top;
+    line-height: 1.5;
   }
 
+  .rules-table tr:nth-child(even) td { background: #F9F9F7; }
   .rules-table tr:last-child td { border-bottom: none; }
-  .rules-table tr:hover td { background: #f5f5f0; }
+  .rules-table tr:hover td { background: #FFF9E0; }
 
-  .divider {
-    height: 1px;
-    background: #eee;
-    margin: 14px 0;
-  }
-
-  /* SVG diagram */
-  .diagram-svg {
-    width: 100%;
-    border-radius: 8px;
-    background: #fafaf7;
-    border: 1px solid #eee;
-    padding: 8px;
-  }
-
-  /* Comparison grid for shapes */
+  /* Compare cards */
   .compare-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -294,57 +394,121 @@
   }
 
   .compare-card {
-    background: #f5f5f0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+    background: #F4F4F1;
+    border: 2px solid #E8E8E2;
+    border-radius: 6px;
+    padding: 12px 8px;
     text-align: center;
+    transition: border-color .15s;
   }
 
   .compare-card.highlight {
-    background: #e8f0fb;
-    border-color: #a8c0ec;
+    background: #FFFBE6;
+    border-color: #F5C800;
   }
 
   .compare-val {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 700;
-    color: #1a5cb8;
+    color: #1B2A3B;
   }
 
   .compare-lbl {
     font-size: 11px;
-    color: #73726c;
-    margin-top: 2px;
+    color: #595950;
+    margin-top: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
-  @media (max-width: 480px) {
+  .divider { height: 1px; background: #E8E8E2; margin: 14px 0; }
+
+  /* Diagram SVG area */
+  .diagram-wrap {
+    background: #F4F4F1;
+    border: 1px solid #E8E8E2;
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  /* Footer */
+  .ws-footer {
+    background: #1B2A3B;
+    color: #A8B8C8;
+    font-size: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    margin-top: 8px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .ws-footer a { color: #F5C800; text-decoration: none; }
+
+  /* Disclaimer card */
+  .disclaimer {
+    background: #FFFBE6;
+    border: 1px solid #D4AC00;
+    border-left: 5px solid #F5C800;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #595950;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .disclaimer strong { color: #1B2A3B; }
+
+  @media (max-width: 520px) {
     .compare-grid { grid-template-columns: 1fr; }
-    .metric-grid { grid-template-columns: repeat(2, 1fr); }
-    .field-label { min-width: 100%; }
+    .metric-grid  { grid-template-columns: repeat(2, 1fr); }
+    .field-label  { min-width: 100%; }
     input[type=range] { max-width: 100%; }
+    .tab { padding: 8px 12px; font-size: 12px; }
   }
 </style>
 </head>
 <body>
-<div class="app-wrap">
 
-  <p class="app-title">NZ Machine Guarding Standards</p>
-  <p class="app-sub">Interactive reference — MBIE Ergonomics of Machine Guarding Guide (based on AS4024)</p>
+<!-- Header -->
+<header class="ws-header">
+  <div style="flex-shrink:0; display:flex; align-items:center;">
+    <svg style="height:36px; width:auto; display:block; color:#FFFFFF;" fill="#FFFFFF" viewBox="0 0 255 65" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#FFFFFF">
+        <path d="m58.1,18.04893a8,8 0 0 1 7.9,7.18a2.72,2.72 0 0 1 0.63,-0.08a2.46,2.46 0 0 1 2.37,1.71a5.75,5.75 0 0 0 0,-0.83a11,11 0 1 0 -0.58,3.47l0,-0.16a3,3 0 0 0 0,-0.6a2.16,2.16 0 0 0 -4.3,-0.1l0,0.1a2.19,2.19 0 0 0 0.55,1.44a8,8 0 1 1 -6.76,-12.11m0,-7.09a15,15 0 1 1 -15,15.06a15.07,15.07 0 0 1 15,-15m0,27.09a12,12 0 1 0 -11.91,-12.25l0,0.13a12.07,12.07 0 0 0 12,12.05m73.51,-26.56l-4.28,0l-11.35,10.8l0,-10.91l-3,0l0,17.83l18.63,-17.72zm-6.51,11.79l12.43,-11.79l-4.33,0l-12.1,11.48l13.33,17.45l3.76,0l-13.09,-17.14zm-12.2,7.49l0,9.65l3,0l0,-8.37l4.07,-3.86l9.35,12.23l3.78,0l-12.72,-16.69l-7.48,7.04zm-4.08,9.65l3,0l0,-29.04l-2.92,0l-0.08,29.04zm-10.65,-10.64a9.89,9.89 0 0 0 -4.07,-18.92l-17.84,0l0,29.56l3,0l0,-26.54l14.93,0a6.91,6.91 0 1 1 0.53,13.81l-1.62,0l8.86,12.76l3.63,0l-7.42,-10.67zm-6.49,-2.12l-11.35,0l0,12.76l3.07,0l0,-9.73l6.89,0l6.81,9.73l3.63,0l-9.05,-12.76zm-8.28,-4.07l10.86,0a2.82,2.82 0 1 0 0,-5.64l-10.86,0l0,5.64zm16.7,-2.81a5.82,5.82 0 0 1 -5.84,5.81l-13.91,0l0,-11.64l13.84,0a5.82,5.82 0 0 1 5.81,5.8m-60.38,-9.37l-3.08,0l-5.44,16.84l-4.84,-16.84l-3.16,0l7.88,27.06l8.64,-27.06zm-25,29l3.11,0l4.75,-16.38l4.82,16.42l3.11,0l-7.88,-27.08l-7.91,27.04zm-13.52,-29l9.34,29l3.13,0l-9.32,-29l-3.15,0zm20.87,0l-3.12,0l-4.86,16.84l-5.46,-16.84l-3.13,0l8.7,27.06l7.87,-27.06zm18.87,0l3.13,0l-9.34,29l-3.11,0l9.32,-29z"></path>
+        <path d="m229.39,11.38893l0,29l24.61,0l0,-3l-21.55,0l0,-23l21.31,0l0,-3l-24.37,0zm4.08,4.12l0,9.87l17.61,0l0,-3l-14.59,0l0,-3.92l17.22,0l0,-2.95l-20.24,0zm0,11l0,9.89l20.53,0l0,-3l-17.54,0l0,-3.95l14.59,0l0,-3l-17.58,0.06zm-31.14,14l3,0l0,-26.14l21.31,0l0,-3l-24.34,0l0.03,29.14zm4.09,-15.08l17.58,0l0,-3l-14.57,0l0,-4l17.19,0l0,-2.92l-20.2,0l0,9.92zm0,15.08l3,0l0,-11l14.58,0l0,-3l-17.58,0l0,14zm-27.42,-29.07l-13.36,29l3.24,0l13.36,-29l-3.24,0zm0,16.91l7.85,0l-3.93,-8.51l-3.92,8.51zm12.52,3l-17.24,0l8.59,-18.65l8.65,18.65zm-4.72,-19.91l-3.24,0l13.23,29l3.21,0l-13.2,-29zm-13,21.07l-3.68,8l3.24,0l2.32,-5.06l14.32,0l2.31,5l3.24,0l-3.7,-8l-18.05,0.06zm-13,-8.56a27.05,27.05 0 0 0 -7.75,-1.62a22.14,22.14 0 0 1 -5.58,-1.08c-0.87,-0.38 -0.87,-0.64 -0.87,-1.17c0,-0.29 0,-0.6 0.68,-1a10.23,10.23 0 0 1 5,-0.91c2.59,0 5.51,0.41 7.33,3.37l2.54,-1.62c-2,-3.24 -5.14,-4.78 -9.87,-4.78c-7.54,0 -8.67,3.06 -8.67,4.86a3.94,3.94 0 0 0 2.65,3.91a24.38,24.38 0 0 0 6.49,1.31a25.05,25.05 0 0 1 6.89,1.45a5.18,5.18 0 0 1 3.26,5a5.25,5.25 0 0 1 -2.66,4.72a15.49,15.49 0 0 1 -7.91,1.62c-5.92,0 -9.73,-2 -11.77,-6.18l-2.69,1.3a13,13 0 0 0 5.36,5.77a18.44,18.44 0 0 0 9.15,2.11a18.07,18.07 0 0 0 9.48,-2.09a8.29,8.29 0 0 0 4.14,-7.2a8.4,8.4 0 0 0 -1.51,-5a9,9 0 0 0 -3.64,-2.86m-8.42,13.07c-5.45,0 -9,-1.81 -10.78,-5.56l2.69,-1.3c0.88,1.8 2.58,3.88 8.11,3.88a11.33,11.33 0 0 0 5.77,-1a1.21,1.21 0 0 0 0.71,-1.23c0,-0.68 0,-1 -1,-1.36a22.14,22.14 0 0 0 -5.7,-1.11a27.07,27.07 0 0 1 -7.6,-1.62a8.2,8.2 0 0 1 -0.86,-14.78a19.89,19.89 0 0 1 16.7,0a13.49,13.49 0 0 1 5.17,4.86l-2.54,1.62c-2.21,-3.58 -5.74,-5.32 -10.82,-5.32a14.24,14.24 0 0 0 -7,1.45a5.22,5.22 0 0 0 -2.11,7.07a5.16,5.16 0 0 0 2.68,2.38a25.14,25.14 0 0 0 6.75,1.41a24,24 0 0 1 6.48,1.35a4.12,4.12 0 0 1 2.77,4.05a4.18,4.18 0 0 1 -2.14,3.78a14.34,14.34 0 0 1 -7.34,1.47m77.89,24.06c0,-1.18 1,-1.93 2.73,-1.93a10.13,10.13 0 0 1 2.74,0.39l0,0.89a2.83,2.83 0 0 1 -3.08,2.54c-1.27,0 -2.36,-0.68 -2.36,-1.88m-0.16,-4.75a6.58,6.58 0 0 1 2.87,-0.69c1.75,0 2.78,0.86 2.78,2.55l0,0.32a9.56,9.56 0 0 0 -2.86,-0.41c-2.35,0 -4,1.06 -4,3a3.12,3.12 0 0 0 3.28,2.93l0.19,0a4,4 0 0 0 3.36,-1.62l0,1.4l1.25,0l0,-5.66a3.46,3.46 0 0 0 -3.14,-3.75a3.66,3.66 0 0 0 -0.81,0a7.7,7.7 0 0 0 -3.37,0.77l0.45,1.16zm-7.91,-0.69a3.53,3.53 0 0 1 3.46,3.58l0,0.06a3.44,3.44 0 0 1 -3.27,3.6l-0.15,0a3.5,3.5 0 0 1 -3.44,-3.56l0,-0.07a3.4,3.4 0 0 1 3.18,-3.67l0.23,0m0,8.49a4.87,4.87 0 1 0 -4.86,-4.88a4.87,4.87 0 0 0 4.86,4.86m-9.58,-3.92c0,-2.82 1.62,-4.28 3.68,-4.28l0.11,0l0,-1.39a4,4 0 0 0 -3.79,2.59l0,-2.41l-1.4,0l0,9.31l1.4,0l0,-3.82zm-10.93,0.92c0,-1.18 1,-1.93 2.71,-1.93a9.76,9.76 0 0 1 2.74,0.39l0,0.89a2.83,2.83 0 0 1 -3.08,2.54c-1.27,0 -2.34,-0.68 -2.34,-1.88m-0.16,-4.75a6.44,6.44 0 0 1 2.81,-0.67c1.75,0 2.77,0.86 2.77,2.55l0,0.32a9.63,9.63 0 0 0 -2.87,-0.41c-2.35,0 -4,1.06 -4,3a3.15,3.15 0 0 0 3.32,2.93l0.15,0a4,4 0 0 0 3.37,-1.62l0,1.4l1.33,0l0,-5.66a3.44,3.44 0 0 0 -3.1,-3.75a2.89,2.89 0 0 0 -0.83,0a7.82,7.82 0 0 0 -3.39,0.77l0.44,1.14zm-9.84,2.37a3.23,3.23 0 0 1 3,-3.24a3.06,3.06 0 0 1 3,3.12l0,0.12l-6,0zm3.25,4.19a3.25,3.25 0 0 1 -3.24,-3.15l7.39,0a3.23,3.23 0 0 0 0,-0.44a4.44,4.44 0 0 0 -4,-4.84l-0.34,0a4.87,4.87 0 1 0 4,8l-0.88,-0.78a3.86,3.86 0 0 1 -2.93,1.31m-9,-7.13l3,0l0,-1.2l-3,0l0,-2.91l-1.4,0l0,2.81l-1.3,0l0,1.23l1.29,0l0,5.61a2.38,2.38 0 0 0 2.08,2.63a2.53,2.53 0 0 0 0.55,0a3.65,3.65 0 0 0 1.62,-0.39l0,-1.19a2.83,2.83 0 0 1 -1.34,0.33a1.4,1.4 0 0 1 -1.63,-1.1a1.63,1.63 0 0 1 0,-0.54l0.13,-5.28zm-8.9,-0.2a3.52,3.52 0 0 1 3.48,3.55a3.44,3.44 0 0 1 -3.27,3.6l-0.15,0a3.5,3.5 0 0 1 -3.44,-3.56l0,-0.07a3.43,3.43 0 0 1 3.28,-3.61l0.18,0m0,8.49a4.87,4.87 0 1 0 -4.86,-4.88a4.87,4.87 0 0 0 4.86,4.86m-9.34,-4.86l-5.84,0l2.88,-6.49l2.96,6.49zm-2.19,-8.11l-1.33,0l-5.74,12.68l1.42,0l1.49,-3.24l6.86,0l1.48,3.24l1.52,0l-5.7,-12.68zm-15.87,8.79a2.76,2.76 0 0 1 -2.59,2.92l-0.19,0a2.48,2.48 0 0 1 -2.6,-2.35a3.23,3.23 0 0 1 0,-0.44l0,-5.43l-1.4,0l0,5.79a3.4,3.4 0 0 0 3.06,3.71l0.5,0a3.52,3.52 0 0 0 3.25,-1.83l0,1.63l1.36,0l0,-9.3l-1.41,0l0.02,5.3zm-12.34,0.28c0,-2.82 1.62,-4.28 3.7,-4.28l0.09,0l0,-1.38a4,4 0 0 0 -3.79,2.59l0,-2.41l-1.44,0l0,9.31l1.39,0l0.05,-3.83zm-10.93,0.92c0,-1.18 1,-1.93 2.73,-1.93a9.62,9.62 0 0 1 2.72,0.39l0,0.89a2.83,2.83 0 0 1 -3.08,2.54c-1.25,0 -2.34,-0.68 -2.34,-1.88m-0.16,-4.75a6.58,6.58 0 0 1 2.82,-0.66c1.75,0 2.77,0.86 2.77,2.55l0,0.32a9.45,9.45 0 0 0 -2.85,-0.41c-2.37,0 -4,1.06 -4,3a3.13,3.13 0 0 0 3.32,2.93l0.17,0a4,4 0 0 0 3.39,-1.64l0,1.4l1.33,0l0,-5.64a3.44,3.44 0 0 0 -3.1,-3.75a2.89,2.89 0 0 0 -0.83,0a7.82,7.82 0 0 0 -3.39,0.77l0.37,1.13zm-6.82,-2a3.73,3.73 0 0 0 -3.25,1.85a3.23,3.23 0 0 0 -3,-1.85a3.42,3.42 0 0 0 -3,1.74l0,-1.58l-1.38,0l0,9.3l1.38,0l0,-5.22a2.68,2.68 0 0 1 2.43,-2.9l0.16,0c1.48,0 2.4,1 2.4,2.77l0,5.43l1.36,0l0,-5.36a2.6,2.6 0 0 1 2.34,-2.84l0.27,0c1.51,0 2.42,1 2.42,2.8l0,5.4l1.31,0l0,-5.75a3.33,3.33 0 0 0 -2.89,-3.72l-0.56,0m-15,5.53a2.76,2.76 0 0 1 -2.55,2.92l-0.23,0a2.48,2.48 0 0 1 -2.6,-2.35a1.62,1.62 0 0 1 0,-0.44l0,-5.49l-1.28,0l0,5.79a3.4,3.4 0 0 0 3.11,3.71l0.55,0a3.52,3.52 0 0 0 3.25,-1.83l0,1.63l1.2,0l0,-9.3l-1.37,0l-0.08,5.36zm-16.15,1.17c0,-1.18 1,-1.93 2.73,-1.93a10.13,10.13 0 0 1 2.74,0.39l0,0.89a2.84,2.84 0 0 1 -3.09,2.54c-1.26,0 -2.35,-0.68 -2.35,-1.88m-0.16,-4.75a6.66,6.66 0 0 1 2.81,-0.69c1.73,0 2.77,0.86 2.77,2.55l0,0.32a9.45,9.45 0 0 0 -2.85,-0.41c-2.35,0 -4,1.06 -4,3a3.1,3.1 0 0 0 3.26,2.93l0.21,0a4,4 0 0 0 3.37,-1.62l0,1.4l1.33,0l0,-5.66a3.45,3.45 0 0 0 -3.89,-3.69a7.67,7.67 0 0 0 -3.39,0.76l0.38,1.11zm-4.7,1.87l0,5.64l1.43,0l0,-12.63l-1.51,0l0,5.6l-7.23,0l0,-5.6l-1.41,0l0,12.6l1.41,0l0,-5.62l7.31,0.01zm-18.57,5.64l1.39,0l0,-9.3l-1.39,0l0,9.3zm-0.1,-11.34l1.62,0l0,-1.54l-1.66,0l0.04,1.54zm-9.55,6a2.74,2.74 0 0 1 2.52,-2.86l0.23,0a2.49,2.49 0 0 1 2.6,2.36a3.38,3.38 0 0 1 0,0.45l0,5.43l1.38,0l0,-5.81a3.42,3.42 0 0 0 -3.08,-3.72l-0.52,0a3.53,3.53 0 0 0 -3.24,1.82l0,-5.46l-1.4,0l0,13.13l1.4,0l0.11,-5.34zm-11,2.57c0,-1.18 1,-1.93 2.72,-1.93a9.62,9.62 0 0 1 2.72,0.39l0,0.89a2.83,2.83 0 0 1 -3.08,2.54c-1.26,0 -2.33,-0.68 -2.33,-1.88m-0.17,-4.75a6.39,6.39 0 0 1 2.79,-0.69c1.76,0 2.78,0.86 2.78,2.55l0,0.32a9.69,9.69 0 0 0 -2.78,-0.41c-2.36,0 -4,1.06 -4,3a3.15,3.15 0 0 0 3.32,2.93l0.15,0a4.08,4.08 0 0 0 3.38,-1.62l0,1.4l1.33,0l0,-5.66a3.45,3.45 0 0 0 -3.18,-3.72a3.57,3.57 0 0 0 -0.8,0a7.67,7.67 0 0 0 -3.39,0.76l0.4,1.14zm-9.43,4.07l-4.66,-6.76l0,10.2l-1.38,0l0,-12.63l1.44,0l4.59,6.88l4.59,-6.88l1.44,0l0,12.6l-1.42,0l0,-10.17l-4.6,6.76z"></path>
+      </g>
+    </svg>
+  </div>
+  <span class="ws-header-badge">Machine Guarding Tool</span>
+</header>
 
-  <div class="tab-bar">
-    <button class="tab active" onclick="switchTab('rrv', this)">Reach-over calculator</button>
-    <button class="tab" onclick="switchTab('opening', this)">Opening calculator</button>
-    <button class="tab" onclick="switchTab('barrier', this)">Barrier reach</button>
-    <button class="tab" onclick="switchTab('rules', this)">Quick reference</button>
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <div class="hero-band">
+    <p class="hero-title">Machine Guarding Standards — Interactive Reference</p>
+    <p class="hero-sub">Based on the MBIE <strong>Ergonomics of Machine Guarding Guide</strong> and <strong>AS4024 Safety of Machinery</strong>. Use the calculators below to determine safe guarding distances for your workplace.</p>
   </div>
 
-  <!-- ===== TAB 1: RRV ===== -->
-  <div class="panel active" id="tab-rrv">
-    <p class="section-title">Reasonable reach values (RRV)</p>
-    <p class="section-sub">Find the minimum guard distance (C) based on the danger zone height (A) and guard height (B). Based on Table 1 of the MBIE guide.</p>
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('rrv',this)">Reach-over calculator</button>
+    <button class="tab" onclick="switchTab('opening',this)">Opening calculator</button>
+    <button class="tab" onclick="switchTab('barrier',this)">Barrier reach</button>
+    <button class="tab" onclick="switchTab('rules',this)">Quick reference</button>
+  </div>
 
-    <div class="card">
+  <!-- ══════════════════════════════════════════════════════
+       TAB 1 — RRV
+  ══════════════════════════════════════════════════════ -->
+  <div class="panel active" id="tab-rrv">
+    <p class="section-title">Reasonable Reach Values (RRV)</p>
+    <p class="section-sub">Calculate the minimum distance (C) that a guard must be placed from a dangerous part, based on the height of the dangerous part from the floor (A) and the height of the guard (B). Source: Table 1, MBIE Ergonomics of Machine Guarding Guide.</p>
+
+    <div class="card accent-yellow">
+      <div class="card-title">Enter your measurements</div>
       <div class="field-row">
         <span class="field-label">Danger zone height (A)</span>
         <input type="range" min="300" max="2440" step="10" value="610" id="sliderA" oninput="calcRRV()">
@@ -360,54 +524,68 @@
     </div>
 
     <div class="card">
-      <p class="card-title">How the three values relate</p>
-      <svg class="diagram-svg" viewBox="0 0 420 200">
-        <defs>
-          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
-        <!-- Floor -->
-        <line x1="20" y1="175" x2="400" y2="175" stroke="#888" stroke-width="2"/>
-        <text font-family="Arial,sans-serif" font-size="11" fill="#888" x="20" y="190">Floor level</text>
-        <!-- Guard -->
-        <rect x="115" y="60" width="16" height="115" rx="3" fill="#c5d9f0" stroke="#1a5cb8" stroke-width="1.5"/>
-        <text font-family="Arial,sans-serif" font-size="11" fill="#1a5cb8" x="123" y="52" text-anchor="middle" font-weight="600">Guard (B)</text>
-        <line x1="138" y1="60" x2="138" y2="175" stroke="#1a5cb8" stroke-width="0.8" stroke-dasharray="3 3"/>
-        <!-- B arrow -->
-        <line x1="107" y1="62" x2="107" y2="173" stroke="#1a5cb8" stroke-width="1" marker-end="url(#arr)" marker-start="url(#arr)"/>
-        <!-- Danger zone -->
-        <rect x="265" y="115" width="60" height="60" rx="6" fill="#faeeda" stroke="#ba7517" stroke-width="1.5"/>
-        <text font-family="Arial,sans-serif" font-size="10" fill="#ba7517" x="295" y="148" text-anchor="middle" font-weight="600">Danger</text>
-        <text font-family="Arial,sans-serif" font-size="10" fill="#ba7517" x="295" y="161" text-anchor="middle" font-weight="600">zone (A)</text>
-        <!-- A arrow -->
-        <line x1="333" y1="117" x2="333" y2="173" stroke="#ba7517" stroke-width="1" marker-end="url(#arr)" marker-start="url(#arr)"/>
-        <text font-family="Arial,sans-serif" font-size="10" fill="#ba7517" x="345" y="150">A</text>
-        <!-- C arrow -->
-        <line x1="132" y1="150" x2="264" y2="150" stroke="#3b6d11" stroke-width="1.5" marker-end="url(#arr)" marker-start="url(#arr)"/>
-        <text font-family="Arial,sans-serif" font-size="11" fill="#3b6d11" x="198" y="143" text-anchor="middle" font-weight="600">Distance C (min.)</text>
-        <!-- Person -->
-        <ellipse cx="60" cy="68" rx="11" ry="13" fill="#bbb" opacity="0.5"/>
-        <rect x="51" y="81" width="18" height="45" rx="5" fill="#bbb" opacity="0.5"/>
-        <line x1="69" y1="92" x2="113" y2="108" stroke="#bbb" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
-        <text font-family="Arial,sans-serif" font-size="10" fill="#888" x="60" y="140" text-anchor="middle">Worker</text>
-      </svg>
+      <div class="card-title">How A, B and C relate</div>
+      <div class="diagram-wrap">
+        <svg width="100%" viewBox="0 0 460 210">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#595950" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <marker id="arrB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#1B2A3B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <marker id="arrY" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#D4AC00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <!-- Floor -->
+          <line x1="20" y1="182" x2="440" y2="182" stroke="#1B2A3B" stroke-width="2"/>
+          <text font-family="Arial,sans-serif" font-size="11" fill="#595950" x="22" y="197">Floor level</text>
+          <!-- Worker silhouette -->
+          <ellipse cx="68" cy="70" rx="12" ry="14" fill="#1B2A3B" opacity="0.25"/>
+          <rect x="58" y="84" width="20" height="48" rx="6" fill="#1B2A3B" opacity="0.25"/>
+          <line x1="78" y1="96" x2="128" y2="112" stroke="#1B2A3B" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+          <text font-family="Arial,sans-serif" font-size="10" fill="#595950" x="68" y="146" text-anchor="middle">Worker</text>
+          <!-- Guard -->
+          <rect x="126" y="62" width="16" height="120" rx="3" fill="#BDD5F0" stroke="#1B2A3B" stroke-width="2"/>
+          <text font-family="Arial,sans-serif" font-size="11" fill="#1B2A3B" x="134" y="53" text-anchor="middle" font-weight="700">Guard (B)</text>
+          <!-- B arrow -->
+          <line x1="116" y1="64" x2="116" y2="180" stroke="#1B2A3B" stroke-width="1.2" marker-end="url(#arrB)" marker-start="url(#arrB)"/>
+          <!-- Danger zone -->
+          <rect x="278" y="118" width="64" height="64" rx="6" fill="#FFF3E0" stroke="#D4690A" stroke-width="2"/>
+          <text font-family="Arial,sans-serif" font-size="10" fill="#D4690A" x="310" y="153" text-anchor="middle" font-weight="700">DANGER</text>
+          <text font-family="Arial,sans-serif" font-size="10" fill="#D4690A" x="310" y="166" text-anchor="middle" font-weight="700">ZONE (A)</text>
+          <!-- A arrow -->
+          <line x1="350" y1="120" x2="350" y2="180" stroke="#D4690A" stroke-width="1.2" marker-end="url(#arr)" marker-start="url(#arr)"/>
+          <text font-family="Arial,sans-serif" font-size="10" fill="#D4690A" x="360" y="155" font-weight="700">A</text>
+          <!-- C arrow -->
+          <line x1="143" y1="158" x2="277" y2="158" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)" marker-start="url(#arrG)"/>
+          <text font-family="Arial,sans-serif" font-size="11" fill="#2E7D32" x="210" y="150" text-anchor="middle" font-weight="700">Min. distance C</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Note:</strong> AS4024 <em>Safety of Machinery</em> recommends longer distances in most circumstances. Always apply the longer distance where practicable and consult a qualified health and safety professional for site-specific assessments.
     </div>
   </div>
 
-  <!-- ===== TAB 2: OPENING ===== -->
+  <!-- ══════════════════════════════════════════════════════
+       TAB 2 — OPENING
+  ══════════════════════════════════════════════════════ -->
   <div class="panel" id="tab-opening">
     <p class="section-title">Guard opening safe distance</p>
-    <p class="section-sub">Find the required safe distance from the guard to the dangerous part based on the shape and size of an opening in the guard.</p>
+    <p class="section-sub">Determine the minimum safe distance from a guard opening to the dangerous part, based on the shape and size of the opening. Based on Table 4 of the MBIE guide.</p>
 
-    <div class="card">
-      <div style="margin-bottom:14px;">
-        <span class="field-label" style="display:block; margin-bottom:8px; font-size:13px; color:#555;">Opening shape</span>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="shape-btn active" id="btn-slot"   onclick="selectShape('slot')">Slot (parallel)</button>
-          <button class="shape-btn"        id="btn-square" onclick="selectShape('square')">Square</button>
-          <button class="shape-btn"        id="btn-circle" onclick="selectShape('circle')">Round / circle</button>
-        </div>
+    <div class="card accent-yellow">
+      <div class="card-title">Opening details</div>
+      <div class="shape-btns">
+        <button class="shape-btn active" id="btn-slot"   onclick="selectShape('slot')">Slot (parallel)</button>
+        <button class="shape-btn"        id="btn-square" onclick="selectShape('square')">Square</button>
+        <button class="shape-btn"        id="btn-circle" onclick="selectShape('circle')">Round / circle</button>
       </div>
       <div class="field-row">
         <span class="field-label">Opening size</span>
@@ -419,32 +597,55 @@
     </div>
 
     <div class="card">
-      <p class="card-title">Safe distances — all three shapes compared</p>
+      <div class="card-title">Compare all three shapes at this size</div>
       <div class="compare-grid">
-        <div class="compare-card" id="cc-slot"><div class="compare-val" id="rc-slot">—</div><div class="compare-lbl">Slot (parallel)</div></div>
-        <div class="compare-card" id="cc-square"><div class="compare-val" id="rc-square">—</div><div class="compare-lbl">Square</div></div>
-        <div class="compare-card" id="cc-circle"><div class="compare-val" id="rc-circle">—</div><div class="compare-lbl">Round / circle</div></div>
+        <div class="compare-card" id="cc-slot">
+          <div class="compare-val" id="rc-slot">—</div>
+          <div class="compare-lbl">Slot</div>
+        </div>
+        <div class="compare-card" id="cc-square">
+          <div class="compare-val" id="rc-square">—</div>
+          <div class="compare-lbl">Square</div>
+        </div>
+        <div class="compare-card" id="cc-circle">
+          <div class="compare-val" id="rc-circle">—</div>
+          <div class="compare-lbl">Round</div>
+        </div>
       </div>
-      <p style="font-size:12px; color:#73726c; margin-top:10px; line-height:1.5;">For 16–38 mm openings, slots allow the furthest reach. Round openings are most restrictive up to 50 mm. Above 50 mm all shapes are treated the same.</p>
+      <p style="font-size:12px; color:#595950; margin-top:12px; line-height:1.6;">For 16–38 mm openings, slots allow the furthest reach and require the greatest safe distance. Round openings are most restrictive up to 50 mm diameter. Above 50 mm all three shapes are treated the same.</p>
     </div>
   </div>
 
-  <!-- ===== TAB 3: BARRIER ===== -->
+  <!-- ══════════════════════════════════════════════════════
+       TAB 3 — BARRIER
+  ══════════════════════════════════════════════════════ -->
   <div class="panel" id="tab-barrier">
     <p class="section-title">Reach around barriers</p>
-    <p class="section-sub">When a worker's arm reaches over or around a barrier, how much can flex around it depends on how close the barrier edge is to the "reasonable reach curve".</p>
+    <p class="section-sub">When a worker's arm reaches over or around a barrier, the ability to flex around it depends on how close the barrier edge is to the "reasonable reach curve" (RRC). Use this calculator to assess whether a barrier provides adequate protection.</p>
 
     <div class="metric-grid">
-      <div class="metric-card"><div class="metric-val red">460 mm</div><div class="metric-label">Avg elbow-to-fingertip — arm can fully wrap if barrier is this far</div></div>
-      <div class="metric-card"><div class="metric-val amber">430 mm</div><div class="metric-label">Forearm can't fully bend around barrier</div></div>
-      <div class="metric-card"><div class="metric-val blue">200 mm</div><div class="metric-label">Max hand-only reach around barrier edge</div></div>
-      <div class="metric-card"><div class="metric-val green">80 mm</div><div class="metric-label">Fingers-only reach radius</div></div>
+      <div class="metric-card">
+        <div class="metric-val red">460 mm</div>
+        <div class="metric-label">Average elbow-to-fingertip — arm fully wraps if barrier is this far or more</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val amber">430 mm</div>
+        <div class="metric-label">Forearm cannot fully bend around the barrier</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val" style="color:#1B2A3B;">200 mm</div>
+        <div class="metric-label">Maximum hand-only reach radius around barrier edge</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val green">80 mm</div>
+        <div class="metric-label">Fingers-only reach radius</div>
+      </div>
     </div>
 
-    <div class="card">
-      <p class="card-title">Adjust barrier distance from the reach curve</p>
+    <div class="card accent-yellow">
+      <div class="card-title">Assess your barrier</div>
       <div class="field-row">
-        <span class="field-label">Barrier distance</span>
+        <span class="field-label">Barrier distance from RRC</span>
         <input type="range" min="50" max="500" step="5" value="250" id="sliderBar" oninput="calcBarrier()">
         <span class="field-val" id="valBar">250 mm</span>
       </div>
@@ -452,42 +653,46 @@
     </div>
 
     <div class="card">
-      <p class="card-title">Decision rules summary</p>
+      <div class="card-title">Decision rules summary</div>
       <table class="rules-table">
-        <thead><tr><th>Distance from reach curve</th><th>Assessment</th></tr></thead>
+        <thead>
+          <tr><th>Distance from reach curve</th><th>Assessment</th></tr>
+        </thead>
         <tbody>
-          <tr><td>≥ 460 mm</td><td>Whole forearm bends around — barrier <strong>ineffective</strong></td></tr>
-          <tr><td>430 mm</td><td>Arm partly bends; hand still reaches ~200 mm under the barrier</td></tr>
-          <tr><td>200–430 mm</td><td>Hand only; keep danger zone &gt;200 mm from barrier edge</td></tr>
-          <tr><td>80–200 mm</td><td>Restricted hand reach; still keep danger zone &gt;200 mm from edge</td></tr>
-          <tr><td>&lt; 80 mm</td><td>Fingers only can curl under; keep danger zone &gt;80 mm from edge</td></tr>
+          <tr><td><strong>≥ 460 mm</strong></td><td>Whole forearm bends around — barrier is <strong>ineffective</strong></td></tr>
+          <tr><td><strong>430 mm</strong></td><td>Forearm partly bends; hand still reaches approx. 200 mm under barrier edge</td></tr>
+          <tr><td><strong>200–430 mm</strong></td><td>Hand only bends around; keep danger zone more than 200 mm from barrier edge</td></tr>
+          <tr><td><strong>80–200 mm</strong></td><td>Restricted hand reach; still maintain 200 mm clearance from barrier edge</td></tr>
+          <tr><td><strong>&lt; 80 mm</strong></td><td>Fingers only can curl under; keep danger zone more than 80 mm from barrier edge</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- ===== TAB 4: QUICK REF ===== -->
+  <!-- ══════════════════════════════════════════════════════
+       TAB 4 — QUICK REF
+  ══════════════════════════════════════════════════════ -->
   <div class="panel" id="tab-rules">
     <p class="section-title">Quick reference</p>
-    <p class="section-sub">Key rules, formulas, and body dimensions from the MBIE guide and AS4024.</p>
+    <p class="section-sub">Key rules, formulas, and body dimensions from the MBIE Ergonomics of Machine Guarding Guide.</p>
 
     <div class="card">
-      <p class="card-title">Five rules — slot / parallel openings</p>
+      <div class="card-title">Five rules — slot / parallel openings</div>
       <table class="rules-table">
         <thead><tr><th>Opening gap (y)</th><th>Min. safe distance (x)</th><th>Basis</th></tr></thead>
         <tbody>
-          <tr><td>Up to 6 mm</td><td>25 mm</td><td>Working clearance only (treated as solid)</td></tr>
-          <tr><td>6–13 mm</td><td>50 mm</td><td>Part-finger length + clearance</td></tr>
-          <tr><td>13–16 mm</td><td>100 mm</td><td>Full finger length + clearance</td></tr>
+          <tr><td>Up to 6 mm</td><td><strong>25 mm</strong></td><td>Treated as solid — working clearance only</td></tr>
+          <tr><td>6–13 mm</td><td><strong>50 mm</strong></td><td>Part-finger length + clearance</td></tr>
+          <tr><td>13–16 mm</td><td><strong>100 mm</strong></td><td>Full finger length + clearance</td></tr>
           <tr><td>16–82 mm</td><td><strong>x = 10(y − 6)</strong></td><td>Anthropometric formula</td></tr>
-          <tr><td>82–152 mm</td><td>840 mm</td><td>Armpit-to-fingertip (full arm reach)</td></tr>
-          <tr><td>&gt;152 mm</td><td>Apply RRV Table 1</td><td>Full reach-over rules apply</td></tr>
+          <tr><td>82–152 mm</td><td><strong>840 mm</strong></td><td>Armpit-to-fingertip (full arm reach)</td></tr>
+          <tr><td>&gt;152 mm</td><td><strong>Apply RRV Table 1</strong></td><td>Full reach-over rules apply</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="card">
-      <p class="card-title">Key body dimensions used in calculations</p>
+    <div class="card accent-yellow">
+      <div class="card-title">Key body dimensions used in all calculations</div>
       <div class="metric-grid">
         <div class="metric-card"><div class="metric-val">840 mm</div><div class="metric-label">Armpit to fingertip</div></div>
         <div class="metric-card"><div class="metric-val">460 mm</div><div class="metric-label">Elbow to fingertip</div></div>
@@ -498,30 +703,35 @@
     </div>
 
     <div class="card">
-      <p class="card-title">Opening shape comparison (16–50 mm range)</p>
+      <div class="card-title">Opening shape comparison (16–50 mm range)</div>
       <table class="rules-table">
         <thead><tr><th>Shape</th><th>Characteristic</th><th>Key threshold</th></tr></thead>
         <tbody>
-          <tr><td>Slot (parallel)</td><td>Allows furthest reach for 16–38 mm openings</td><td>Formula applies from 16 mm</td></tr>
-          <tr><td>Square</td><td>Thumb restricts reach — less reach than slot up to 38 mm</td><td>38 mm sq = max at 100 mm distance</td></tr>
-          <tr><td>Round</td><td>Most restrictive up to 50 mm diameter</td><td>55 mm dia = whole forearm can pass through</td></tr>
+          <tr><td><strong>Slot (parallel)</strong></td><td>Allows furthest reach for 16–38 mm openings — requires greatest safe distance</td><td>Formula from 16 mm</td></tr>
+          <tr><td><strong>Square</strong></td><td>Thumb restricts reach — less reach than slot up to 38 mm</td><td>38 mm sq = max opening at 100 mm distance</td></tr>
+          <tr><td><strong>Round</strong></td><td>Most restrictive up to 50 mm diameter — thumb blocks insertion</td><td>55 mm dia = whole forearm passes through</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="card" style="background:#fafaf7; border-color:#ddd;">
-      <p style="font-size:12px; color:#73726c; line-height:1.6;">
-        <strong>Disclaimer:</strong> This tool is a guide only and is based on the MBIE Ergonomics of Machine Guarding Guide (June 2013). 
-        It should not be used as a substitute for the Australian Standard AS4024 <em>Safety of Machinery</em>, which recommends longer distances in most circumstances. 
-        Always consult a qualified health and safety professional for machinery-specific assessments.
-      </p>
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong> This tool is a guide only, based on the MBIE Ergonomics of Machine Guarding Guide (June 2013). It does not replace the Australian Standard AS4024 <em>Safety of Machinery</em>, which recommends longer distances in most circumstances. Duty holders must take all practicable steps under the <strong>Health and Safety at Work Act 2015</strong>. Always consult a qualified professional for machinery-specific assessments. Visit <a href="https://www.worksafe.govt.nz/topic-and-industry/machinery/" target="_blank">worksafe.govt.nz/machinery</a> for further guidance.
     </div>
   </div>
 
-</div><!-- /app-wrap -->
+</div><!-- /page-wrap -->
 
+<footer class="ws-footer">
+  WorkSafe New Zealand &mdash; Mō te oranga me te haumaru o ngā tāngata katoa &nbsp;|&nbsp;
+  <a href="https://www.worksafe.govt.nz" target="_blank">worksafe.govt.nz</a> &nbsp;|&nbsp;
+  0800 030 040
+</footer>
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════ -->
 <script>
-// ---- RRV DATA ----
+/* ── RRV DATA (Table 1) ── */
 var rrvData = {
   2440:[0,0,0,0,0,0,0,0,0],
   2360:[230,230,230,230,230,150,130,100,null],
@@ -542,50 +752,50 @@ var rrvData = {
   1220:[910,760,610,0,null,null,null,null,null],
   1140:[910,760,610,null,null,null,null,null,null],
   1070:[910,680,530,null,null,null,null,null,null],
-  990:[910,680,460,null,null,null,null,null,null],
-  910:[840,610,300,null,null,null,null,null,null],
-  840:[840,530,0,null,null,null,null,null,null],
-  760:[760,380,null,null,null,null,null,null,null],
-  680:[610,150,null,null,null,null,null,null,null],
-  610:[530,0,null,null,null,null,null,null,null],
-  530:[380,null,null,null,null,null,null,null,null],
-  460:[0,null,null,null,null,null,null,null,null],
-  380:[null,null,null,null,null,null,null,null,null],
-  300:[null,null,null,null,null,null,null,null,null]
+  990: [910,680,460,null,null,null,null,null,null],
+  910: [840,610,300,null,null,null,null,null,null],
+  840: [840,530,0,null,null,null,null,null,null],
+  760: [760,380,null,null,null,null,null,null,null],
+  680: [610,150,null,null,null,null,null,null,null],
+  610: [530,0,null,null,null,null,null,null,null],
+  530: [380,null,null,null,null,null,null,null,null],
+  460: [0,null,null,null,null,null,null,null,null],
+  380: [null,null,null,null,null,null,null,null,null],
+  300: [null,null,null,null,null,null,null,null,null]
 };
 var rrvBKeys = [1220,1370,1520,1680,1830,1980,2130,2280,2440];
 var rrvAKeys = [2440,2360,2280,2210,2130,2060,1980,1900,1830,1750,1680,1600,1520,1450,1370,1300,1220,1140,1070,990,910,840,760,680,610,530,460,380,300];
 
 function findClosest(val, arr) {
-  var best = arr[0], bestD = Infinity;
-  for (var i=0; i<arr.length; i++) { var d = Math.abs(arr[i]-val); if(d<bestD){bestD=d; best=arr[i];} }
+  var best = arr[0], bestD = 1e9;
+  for (var i=0; i<arr.length; i++) { var d=Math.abs(arr[i]-val); if(d<bestD){bestD=d;best=arr[i];} }
   return best;
 }
 
 function calcRRV() {
-  var A = parseInt(document.getElementById('sliderA').value);
-  var B = parseInt(document.getElementById('sliderB').value);
-  document.getElementById('valA').textContent = A + ' mm';
-  document.getElementById('valB').textContent = B + ' mm';
+  var A = +document.getElementById('sliderA').value;
+  var B = +document.getElementById('sliderB').value;
+  document.getElementById('valA').textContent = A+' mm';
+  document.getElementById('valB').textContent = B+' mm';
   var aKey = findClosest(A, rrvAKeys);
   var bKey = findClosest(B, rrvBKeys);
   var bIdx = rrvBKeys.indexOf(bKey);
-  var row = rrvData[aKey];
-  var C = (row && row[bIdx] !== undefined) ? row[bIdx] : null;
+  var row  = rrvData[aKey];
+  var C    = (row && row[bIdx]!==undefined) ? row[bIdx] : null;
   var html = '';
-  if (C === null) {
-    html = '<div class="result-box danger"><div class="result-label">Result</div><div class="result-num danger">No data for this combination</div><p class="result-detail" style="color:#a32d2d;">This guard height may be insufficient for this danger zone height. Consider a taller guard or refer directly to AS4024.</p></div>';
-  } else if (C === 0) {
-    html = '<div class="result-box success"><div class="result-label">Minimum guard-to-danger distance (C)</div><div class="result-num success">0 mm — guard can be adjacent</div><p class="result-detail" style="color:#3b6d11;">At these heights (danger zone ~'+aKey+' mm, guard ~'+bKey+' mm), the guard can be placed immediately adjacent to the danger zone. Ensure any openings in the guard are also within safe limits.</p></div>';
+  if (C===null) {
+    html='<div class="result-box danger"><div class="result-label">Result</div><div class="result-num danger">No data — combination not in table</div><p class="result-detail">This guard height may be insufficient for the selected danger zone height. Consider increasing guard height or refer directly to AS4024 for detailed values.</p></div>';
+  } else if (C===0) {
+    html='<div class="result-box success"><div class="result-label">Minimum guard-to-danger distance (C)</div><div class="result-num success">0 mm — guard can be adjacent</div><p class="result-detail">At danger zone height ~'+aKey+' mm (A) and guard height ~'+bKey+' mm (B), the guard may be positioned immediately adjacent to the danger zone. Still ensure any openings in the guard comply with opening size rules.</p></div>';
   } else {
-    var level = C >= 700 ? 'warn' : 'success';
-    var textCol = level === 'warn' ? '#854f0b' : '#3b6d11';
-    html = '<div class="result-box '+level+'"><div class="result-label">Minimum guard-to-danger distance (C)</div><div class="result-num '+level+'">'+C+' mm</div><p class="result-detail" style="color:'+textCol+';">With danger zone at ~'+aKey+' mm (A) and guard at ~'+bKey+' mm (B), place the guard at least '+C+' mm from the danger zone. If the guard has openings, also check opening size limits.</p></div>';
+    var lvl = C>=700?'warn':'success';
+    var col = lvl==='warn'?'#D4690A':'#2E7D32';
+    html='<div class="result-box '+lvl+'"><div class="result-label">Minimum guard-to-danger distance (C)</div><div class="result-num '+lvl+'">'+C+' mm</div><p class="result-detail" style="color:'+col+'">With danger zone at ~'+aKey+' mm (A) and guard at ~'+bKey+' mm (B): place the guard at least <strong>'+C+' mm</strong> from the danger zone. If the guard contains openings, also check opening size limits using the Opening Calculator tab.</p></div>';
   }
   document.getElementById('rrv-result').innerHTML = html;
 }
 
-// ---- OPENING DATA ----
+/* ── OPENING DATA (Table 4) ── */
 var lookupTable = {
   6:{slot:25,square:25,circle:25},
   13:{slot:50,square:50,circle:50},
@@ -610,11 +820,11 @@ var lookupTable = {
 };
 
 function getSafeDist(size, shape) {
-  if (size <= 0) return 0;
-  if (size >= 155) return 'RRV';
+  if (size<=0) return 0;
+  if (size>=155) return 'RRV';
   var keys = Object.keys(lookupTable).map(Number).sort(function(a,b){return a-b;});
   var best = keys[keys.length-1];
-  for (var i=0;i<keys.length;i++) { if (size <= keys[i]) { best=keys[i]; break; } }
+  for (var i=0;i<keys.length;i++){if(size<=keys[i]){best=keys[i];break;}}
   return lookupTable[best][shape];
 }
 
@@ -623,78 +833,77 @@ var currentShape = 'slot';
 function selectShape(s) {
   currentShape = s;
   ['slot','square','circle'].forEach(function(x){
-    document.getElementById('btn-'+x).classList.toggle('active', x===s);
+    document.getElementById('btn-'+x).classList.toggle('active',x===s);
   });
   calcOpening();
 }
 
 function calcOpening() {
-  var size = parseInt(document.getElementById('sliderOpen').value);
-  document.getElementById('valOpen').textContent = size + ' mm';
-  var distSlot   = getSafeDist(size,'slot');
-  var distSquare = getSafeDist(size,'square');
-  var distCircle = getSafeDist(size,'circle');
+  var size = +document.getElementById('sliderOpen').value;
+  document.getElementById('valOpen').textContent = size+' mm';
+  var dSlot   = getSafeDist(size,'slot');
+  var dSquare = getSafeDist(size,'square');
+  var dCircle = getSafeDist(size,'circle');
   var fmt = function(v){ return typeof v==='number' ? v+' mm' : v; };
-  document.getElementById('rc-slot').textContent   = fmt(distSlot);
-  document.getElementById('rc-square').textContent = fmt(distSquare);
-  document.getElementById('rc-circle').textContent = fmt(distCircle);
-  // highlight active shape
+  document.getElementById('rc-slot').textContent   = fmt(dSlot);
+  document.getElementById('rc-square').textContent = fmt(dSquare);
+  document.getElementById('rc-circle').textContent = fmt(dCircle);
   ['slot','square','circle'].forEach(function(x){
-    document.getElementById('cc-'+x).classList.toggle('highlight', x===currentShape);
+    document.getElementById('cc-'+x).classList.toggle('highlight',x===currentShape);
   });
   var dist = getSafeDist(size, currentShape);
-  var basis = '';
-  if (size <= 6)       basis = 'Treated as solid material — working clearance only.';
-  else if (size <= 13) basis = 'Admits part of a finger. Distance = part-finger length + clearance.';
-  else if (size <= 16) basis = 'Admits a full finger. Distance = finger length + clearance (100 mm).';
-  else if (size <= 82) basis = 'Formula applied: x = 10(' + size + ' \u2212 6) = ' + (10*(size-6)) + ' mm';
-  else if (size <= 152) basis = 'Full arm reach zone: minimum 840 mm (armpit to fingertip).';
-  else basis = 'Opening exceeds 152 mm \u2014 apply Reasonable Reach Values from Table 1.';
-  var level = (typeof dist === 'number' && dist >= 840) ? 'warn' : 'success';
-  var textCol = level === 'warn' ? '#854f0b' : '#3b6d11';
-  document.getElementById('opening-result').innerHTML =
-    '<div class="result-box '+level+'"><div class="result-label">Required safe distance ('+currentShape+')</div>'
-    +'<div class="result-num '+level+'">'+(typeof dist==='number' ? dist+' mm' : dist)+'</div>'
-    +'<p class="result-detail" style="color:'+textCol+';">'+basis+'</p></div>';
+  var basis='';
+  if(size<=6)       basis='Treated as solid material — only a working clearance of 25 mm is required.';
+  else if(size<=13) basis='Admits part of a finger. Distance = part-finger length plus clearance.';
+  else if(size<=16) basis='Admits a full finger. Distance = finger length plus clearance (100 mm).';
+  else if(size<=82) basis='Formula applied: x\u202f=\u202f10(\u202f'+size+'\u202f\u2212\u202f6\u202f)\u202f=\u202f'+(10*(size-6))+' mm';
+  else if(size<=152)basis='Full arm reach zone: minimum 840 mm required (armpit to fingertip).';
+  else              basis='Opening exceeds 152\u202fmm \u2014 apply Reasonable Reach Values from Table 1.';
+  var lvl = (typeof dist==='number' && dist>=840)?'warn':'success';
+  var col = lvl==='warn'?'#D4690A':'#2E7D32';
+  document.getElementById('opening-result').innerHTML=
+    '<div class="result-box '+lvl+'"><div class="result-label">Required safe distance ('+currentShape+')</div>'
+    +'<div class="result-num '+lvl+'">'+(typeof dist==='number'?dist+' mm':dist)+'</div>'
+    +'<p class="result-detail" style="color:'+col+'">'+basis+'</p></div>';
 }
 
-// ---- BARRIER ----
+/* ── BARRIER ── */
 function calcBarrier() {
-  var d = parseInt(document.getElementById('sliderBar').value);
-  document.getElementById('valBar').textContent = d + ' mm';
-  var msg, level, detail;
-  if (d >= 460) {
-    level='danger'; msg='Barrier is ineffective';
-    detail='The whole forearm can bend around the barrier at this distance. No safe-by-position area is created. Move the barrier closer to the reach curve, or move the danger zone further away.';
-  } else if (d >= 430) {
-    level='warn'; msg='Partial protection only';
+  var d = +document.getElementById('sliderBar').value;
+  document.getElementById('valBar').textContent = d+' mm';
+  var msg,lvl,detail;
+  if(d>=460){
+    lvl='danger'; msg='Barrier is ineffective';
+    detail='The whole forearm can bend around the barrier at this distance. No safe-by-position area is created. Reduce the gap to the reach curve, or move the danger zone further away.';
+  } else if(d>=430){
+    lvl='warn'; msg='Partial protection only';
     detail='The forearm can partly bend around. The hand can still reach approximately 200 mm under the barrier edge. Ensure any danger zone is more than 200 mm from the barrier edge.';
-  } else if (d >= 200) {
-    level='warn'; msg='Hand-only reach applies';
-    detail='The forearm cannot fully reach around, but the hand can. Keep any danger zone beyond a 200 mm radius from the barrier edge.';
-  } else if (d >= 80) {
-    level=''; msg='Restricted hand reach';
-    detail='Only the hand can bend around with increasing restriction. Keep danger zones beyond 200 mm from the barrier edge to be safe.';
+  } else if(d>=200){
+    lvl='warn'; msg='Hand-only reach applies';
+    detail='The forearm cannot reach around but the hand can. Keep any danger zone beyond a 200 mm radius from the barrier edge.';
+  } else if(d>=80){
+    lvl='success'; msg='Restricted hand reach';
+    detail='Only the hand can bend around with increasing restriction. Maintain danger zone clearance of more than 200 mm from the barrier edge to be safe.';
   } else {
-    level=''; msg='Fingers-only reach';
+    lvl='success'; msg='Fingers-only reach';
     detail='Only fingers can curl under the barrier. Ensure any danger zone is beyond 80 mm from the barrier edge.';
   }
-  var textCol = level==='danger' ? '#a32d2d' : level==='warn' ? '#854f0b' : '#3b6d11';
-  document.getElementById('barrier-result').innerHTML =
-    '<div class="result-box '+(level||'success')+'"><div class="result-label">Assessment at '+d+' mm</div>'
-    +'<div class="result-num '+(level||'success')+'">'+msg+'</div>'
-    +'<p class="result-detail" style="color:'+textCol+';">'+detail+'</p></div>';
+  var col = lvl==='danger'?'#C0392B':lvl==='warn'?'#D4690A':'#2E7D32';
+  document.getElementById('barrier-result').innerHTML=
+    '<div class="result-box '+lvl+'"><div class="result-label">Assessment at '+d+' mm from reach curve</div>'
+    +'<div class="result-num '+lvl+'">'+msg+'</div>'
+    +'<p class="result-detail" style="color:'+col+'">'+detail+'</p></div>';
 }
 
-// ---- TABS ----
+/* ── TABS ── */
 function switchTab(id, btn) {
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
 
-// ---- INIT ----
+/* ── INIT ── */
 calcRRV();
 calcOpening();
 calcBarrier();
